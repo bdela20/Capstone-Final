@@ -8,11 +8,9 @@ import { useGetData } from '../custom-hooks/FetchData';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: "ID", width: 90},
-    { field: 'first', headerName: "Make", flex: 1},
-    { field: 'last', headerName: "Model", flex: 1},
-    { field: 'email', headerName: "Year", flex: 1},
-    { field: 'phone_number', headerName: "Mileage", flex: 1},
-    { field: 'address', headerName: "Year", flex: 1}
+    { field: 'brand', headerName: "Brand", flex: 1},
+    { field: 'litres', headerName: "Litres", flex: 1},
+    { field: 'country', headerName: "Country", flex: 1},
 ]
 
 
@@ -50,16 +48,16 @@ function DataTable() {
                     className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white"
                     onClick={() => handleOpen()}
                 >
-                    Import New Car
+                    Import New Whiskey
                 </button>
             </div> 
-            <Button onClick={handleOpen} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Update</Button>
-            <Button onClick={deleteData} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Delete</Button>
+            <Button onClick={handleOpen} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Update Whiskey</Button>
+            <Button onClick={deleteData} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Delete Whiskey</Button>
         </div>
         <div className={ open ? "hidden" : "container mx-10 my-5 flex flex-col"}
             style={{ height: 400, width: '100%'}}
         >
-            <h2 className="p-3 bg-slate-300 my-2 rounded">My Car Collection</h2>
+            <h2 className="p-3 bg-slate-300 my-2 rounded">My Whiskey Collection</h2>
             <DataGrid 
             rows={contactData} 
             columns={columns}

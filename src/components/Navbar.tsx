@@ -25,8 +25,8 @@ function Navbar() {
 
     return (
         <nav className='flex items-center justify-between flex-wrap bg-red-900 p-6'>
-            <div className='flex items-center flex-shrink-0 text-black mr-6'>
-                <Link to='/' className='font-semibold text-xl tracking-tight'>Car Collection</Link>
+            <div className='flex items-center flex-shrink-0 text-black hover:text-white mr-6'>
+                <Link to='/' className='font-semibold text-xl tracking-tight'>Whiskey's Collection 🥃</Link>
             </div>
             <div className='block'>
                 <button onClick={dropDown} className='flex items-center px-3 py-2 text-black-200 border rounded border-black-400 hover:text-black hover:border-black'>
@@ -44,14 +44,7 @@ function Navbar() {
                             </div>
                         </Button>
                         
-                        <Button className="p-3 m-5 bg-red-700 justify-center rounded">
-                            <div>
-                                <Link to='/contact' onClick={ clicked } className='flex place-items-center mt-4 lg:inline-block lg:mt-0 
-                                text-black-200 hover:text-white mr-4'>
-                                    Contact
-                                </Link>
-                            </div>
-                        </Button>
+                        
                         <Button className='p-3 m-5 bg-red-700 justify-center rounded'>
                             <div>
                                 <Link to='/dashboard' onClick={ clicked} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-white mr-4'>
@@ -76,9 +69,9 @@ function Navbar() {
                                 </div>
                             </Button>
                             :
-                            <Button className='p-3 m-5 bg-teal-400 justify-center'>
+                            <Button className='p-3 m-5 bg-red-300 justify-center'>
                                 <div>
-                                    <Link to="/" onClick={signOutOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white'>
+                                    <Link to="/" onClick={signOutOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-white'>
                                         Sign Out
                                     </Link>
                                 </div>

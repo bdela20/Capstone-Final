@@ -2,7 +2,7 @@ import React from 'react'
 
 function About() {
   return (
-    <div>This is desing by Benjamin De La Rosa 🥷🚗</div>
+    <div>This is desing by Benjamin De La Rosa 🥃🥷</div>
   )
 }
 

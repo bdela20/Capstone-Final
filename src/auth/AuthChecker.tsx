@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import {signInWithPopup } from 'firebase/auth'
+import {auth, Providers} from '../config/firebase'
 
 interface Props {
     children: React.ReactNode;
