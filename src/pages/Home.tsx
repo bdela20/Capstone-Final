@@ -10,8 +10,8 @@ function Home() {
       >
         <div className='flex place-items-center h-screen'>
           <div>
-            <Link to="/Dashboard">
-              <h3 className='p-5 bg-white bg-opacity-25 text-black rounded'> Welcome to the Whiskey Collection 🥃</h3>
+            <Link to="/whiskeys">
+              <h3 className='p-5 bg-white bg-opacity-25 text-black rounded'> Welcome to the Best Whiskey Collection 🥃</h3>
             </Link>
           </div>
         </div>

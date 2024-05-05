@@ -1,6 +1,9 @@
 import Home from '../pages/Home'
 import Dashboard from '../pages/Dashboard'
 import About from '../pages/About'
+import Whiskeys from '../components/Whiskeys'
+import Cart from '../components/Cart/Cart'
+import CartPage from '../pages/CartPage'
 
 interface RouteType {
     path: string,
@@ -26,6 +29,18 @@ const routes: RouteType[] = [
       path: "/about",
       component: About,
       name: "About",
+      protected: false
+    },
+    {
+      path: "/whiskeys",
+      component: Whiskeys,
+      name: "whiskeys",
+      protected: false
+    },
+    {
+      path: "/Cart",
+      component: CartPage,
+      name: "Cart",
       protected: false
     }
 ];

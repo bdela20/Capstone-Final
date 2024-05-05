@@ -1,9 +1,9 @@
-import DataTable from '../components/DataTable'
+import Cart from '../components/Cart/Cart'
 
 function Dashboard() {
   return (
     <div>
-      <DataTable />
+      <Cart cart={undefined} onDeleteFromCart={undefined} />
     </div>
   )
 }

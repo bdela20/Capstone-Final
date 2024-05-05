@@ -1,90 +1,61 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from './Button';
-import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom'
+import Button from './Button'
+import { FunctionComponent } from 'react'
+
+// eslint-disable-next-line react/prop-types
 
 function Navbar() {
-    const [isVisible, setIsVisible] = useState(false);
-    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
-    const signOutOnClick = () => {
-        logout();
-    };
-
-    const signInOnClick = () => {
-        loginWithRedirect();
-    };
-
-    const dropDown = () => {
-        setIsVisible(!isVisible);
-    };
-
-    const clicked = () => {
-        setIsVisible(false);
-    };
-
-    return (
-        <nav className='flex items-center justify-between flex-wrap bg-red-900 p-6'>
-            <div className='flex items-center flex-shrink-0 text-black hover:text-white mr-6'>
-                <Link to='/' className='font-semibold text-xl tracking-tight'>Whiskey's Collection 🥃</Link>
+  return (
+    <nav className='flex items-center justify-between flex-wrap bg-red-900 p-6 sticky top-0 left-0 w-full'>
+      <div className='flex items-center flex-shrink-0 text-black mr-6 hover:text-white'>
+        <Link to='/' className='font-semibold text-xl tracking-tight'>Best Whiskeys in the World 🥃</Link>
+      </div>
+      <div className='w-full block flex-grow items-center'>
+        <div className="text-sm lg:flex-grow">
+          <Button className='p-3 m-5 bg-red-900 justify-center'>
+            <div>
+              <Link to='/' className='flex place-itmes-center mt-4 lg:inline-block lg:mt-0
+               text-black-200 hover:text-white mr-4'>
+                Home 🏠
+              </Link>
             </div>
-            <div className='block'>
-                <button onClick={dropDown} className='flex items-center px-3 py-2 text-black-200 border rounded border-black-400 hover:text-black hover:border-black'>
-                    <i className='fas fa-bars'></i>
-                </button>
+          </Button>
+          <Button className="p-3 m-5 bg-red-900 justify-center">
+            <div>
+              <Link to='/whiskeys' className='flex place-items-center mt-4 lg:inline-block lg:mt-0 
+              text-black-200 hover:text-white mr-4'>
+                List of Whiskeys 🥃
+              </Link>
             </div>
-            { isVisible ? (
-                <div className='w-full block flex-grow items-center '>
-                    <div className="text-sm lg:flex-grow">
-                        <Button className='p-3 m-5 bg-red-700 justify-center rounded'>
-                            <div>
-                                <Link to='/' onClick={ clicked} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-white mr-4'>
-                                    Home
-                                </Link>
-                            </div>
-                        </Button>
-                        
-                        
-                        <Button className='p-3 m-5 bg-red-700 justify-center rounded'>
-                            <div>
-                                <Link to='/dashboard' onClick={ clicked} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-white mr-4'>
-                                    Dashboard
-                                </Link>
-                            </div>
-                        </Button>
-                        <Button className='p-3 m-5 bg-red-700 justify-center rounded'>
-                            <div>
-                                <Link to='/about' onClick={ clicked} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-white mr-4'>
-                                    About
-                                </Link>
-                            </div>
-                        </Button>
-                        {
-                            !isAuthenticated ? 
-                            <Button className='p-3 m-5 bg-red-700 justify-center rounded'>
-                                <div>
-                                    <Link to="/" onClick={signInOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-white'>
-                                        Login
-                                    </Link>
-                                </div>
-                            </Button>
-                            :
-                            <Button className='p-3 m-5 bg-red-300 justify-center'>
-                                <div>
-                                    <Link to="/" onClick={signOutOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-black-200 hover:text-white'>
-                                        Sign Out
-                                    </Link>
-                                </div>
-                            </Button>
-                            
-                        }
-                    </div>
-                </div>
-            ) : (
-                <></>
-            )}
-        </nav>
-    );
+          </Button>
+          <Button className='p-3 m-5 bg-red-900 justify-center'>
+            <div>
+              <Link to='/Cart' className='flex place-itmes-center mt-4 lg:inline-block lg:mt-0
+               text-black-200 hover:text-white mr-4'>
+                Cart 🛒
+              </Link>
+            </div>
+          </Button>
+          <Button className='p-3 m-5 bg-red-900 justify-center'>
+            <div>
+              <Link to='/about' className='flex place-itmes-center mt-4 lg:inline-block lg:mt-0
+               text-black-200 hover:text-white mr-4'>
+                About 🥷
+              </Link>
+            </div>
+          </Button>
+          <Button className="p-3 m-5 bg-red-900 justify-center">
+            <div>
+              <Link to='/contact' className='flex place-items-center mt-4 lg:inline-block lg:mt-0 
+              text-black-200 hover:text-white mr-4'>
+                Profile 👨‍🏫👩‍🏫
+              </Link>
+            </div>
+          </Button>
+        </div>
+      </div>
+    </nav>
+  )
 }
 
-export default Navbar;
+export default Navbar
