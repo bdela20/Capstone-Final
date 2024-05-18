@@ -11,7 +11,7 @@ function Home() {
         <div className='flex place-items-center h-screen'>
           <div>
             <Link to="/whiskeys">
-              <h3 className='p-5 bg-white bg-opacity-25 text-black rounded'> Welcome to the Best Whiskey Collection 🥃</h3>
+              <h1 className='p-10 bg-white bg-opacity-45 text-black rounded'> Welcome to our Handpicked Whiskey Collection 🥃</h1>
             </Link>
           </div>
         </div>

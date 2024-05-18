@@ -1,9 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { CartProvider } from './components/Context/cart'
-
+import React from 'react';
+import ReactDOM from 'react-dom/client'; 
+import App from './App';
+import './index.css';
+import { CartProvider } from './components/Context/cart';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -11,4 +10,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <App />
     </CartProvider>
   </React.StrictMode>,
-)
+);

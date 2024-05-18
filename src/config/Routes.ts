@@ -3,7 +3,8 @@ import Dashboard from '../pages/Dashboard'
 import About from '../pages/About'
 import Whiskeys from '../components/Whiskeys'
 import Cart from '../components/Cart/Cart'
-import CartPage from '../pages/CartPage'
+import CartPage from '../components/Cart/Cart'
+import Checkout from '../components/Cart/Checkout'
 
 interface RouteType {
     path: string,
@@ -41,6 +42,12 @@ const routes: RouteType[] = [
       path: "/Cart",
       component: CartPage,
       name: "Cart",
+      protected: false
+    },
+    {
+      path: "/Checkout",
+      component: Checkout,
+      name: "Checkout",
       protected: false
     }
 ];

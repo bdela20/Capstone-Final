@@ -3,7 +3,7 @@ import Cart from '../components/Cart/Cart'
 function Dashboard() {
   return (
     <div>
-      <Cart cart={undefined} onDeleteFromCart={undefined} />
+      <Cart />
     </div>
   )
 }

@@ -2,66 +2,54 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useState } from 'react';
-//@ts-ignore
+import { useState, useContext } from 'react';
+//@ts-expect-error
 import Background from '../assets/images/Gran_Bar.jpeg';
 import ImageList from '@mui/material/ImageList/ImageList';
 import ImageListItem from '@mui/material/ImageListItem/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar/ImageListItemBar';
-import { CartContext } from '../components/Context/cart'
-import { useContext, useEffect, } from 'react'
-import Cart from '../components/Cart/Cart';
+import { CartContext } from '../components/Context/cart';
 import { Link } from 'react-router-dom';
 
 export default function Whiskey() {
-  const [cart, setCart] = useState<{ img: string; title: string; author: string; price: number; quantity: number; }[]>([]);
+  //@ts-expect-error
+  const { addToCart, cartItems, removeFromCart } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedType, setSelectedType] = useState('All'); // Default to show all items
 
-  function onAddToCart(item: typeof itemData[0]) {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((cartItem) => cartItem.img === item.img);
+  const handleAddToCart = (item: { id?: number; img?: string; title?: string; author?: string; price: any; }) => {
+    addToCart(item);
+    setTotalPrice(prevPrice => prevPrice + item.price);
+  };
 
-      if (existingItem) {
-        return prevCart.map((cartItem) =>
-          cartItem.img === item.img
-         ? {...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
-      }
+  const getItemQuantity = (id: number) => {
+    const cartItem = cartItems.find((item: { id: any; }) => item.id === id);
+    return cartItem ? cartItem.quantity : 0;
+  };
 
-      return [...prevCart, {...item, quantity: 1 }];
-    });
+  const handleDeleteFromCart = (item: { id: any; img?: string; title?: string; author?: string; price: any; }) => {
+    removeFromCart(item.id);
+    setTotalPrice(prevPrice => prevPrice - item.price * getItemQuantity(item.id));
+  };
 
-    setTotalPrice((prevTotalPrice) => prevTotalPrice + item.price);
-  }
-
-  function handleDeleteFromCart(item: typeof cart[0]): void {
-    const existingItem = cart.find((cartItem) => cartItem.img === item.img);
-
-    if (existingItem) {
-      if (existingItem.quantity > 1) {
-        setCart((prevCart) =>
-          prevCart.map((cartItem) =>
-            cartItem.img === item.img
-           ? {...cartItem, quantity: cartItem.quantity - 1 }
-              : cartItem
-          )
-        );
-      } else {
-        setCart((prevCart) => prevCart.filter((cartItem) => cartItem.img!== item.img));
-      }
-
-      setTotalPrice((prevTotalPrice) => prevTotalPrice - item.price);
-    }
-  }
-
+  
+  const filteredItems = selectedType === 'All' ? itemData : itemData.filter(item => item.title === selectedType);
+  
   return (
     <Box sx={{ width: '100%', height: '100%', overflowY: 'initial', backgroundImage: `url(${Background})`, paddingTop: 10, paddingBottom: 7, display: 'flex', flexDirection: 'column' }}>
-      <Typography variant="h4" color="white" sx={{ textAlign: 'center', mb: 4 }}>
-        Pick your poison 🥃
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 4 }}>
+        <Typography variant="h4" color="white" sx={{ marginRight: 2 }}>
+          Filter by Type:
+        </Typography>
+        <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} style={{ padding: '5px', borderRadius: '5px' }}>
+          <option value="All">All</option>
+          {Object.keys(groupItemsByType(itemData)).map((type) => (
+            <option key={type} value={type}>{type}</option>
+          ))}
+        </select>
+      </Box>
       <ImageList variant="standard" cols={4} gap={20}>
-        {itemData.map((item) => (
+        {filteredItems.map((item) => (
           <ImageListItem key={item.img}>
             <img
               src={`${item.img}?w=248&fit=crop&auto=format`}
@@ -77,19 +65,13 @@ export default function Whiskey() {
               subtitle={<Typography variant="overline" color="white">{item.author}</Typography>}
               actionIcon={
                 <>
-                  <Button color="success" onClick={() => onAddToCart(item)}>
+                  <Button color="success" onClick={() => handleAddToCart(item)}>
                     Add to Cart
                   </Button>
-                  {cart.find((cartItem) => cartItem.img === item.img) && (
-                    <>
-                      <Typography variant="body2" color="yellow">
-                        Quantity: {cart.find((cartItem) => cartItem.img === item.img)?.quantity || 0}
-                      </Typography>
-                      <Button color="error" onClick={() => handleDeleteFromCart(item)}>
-                        Delete
-                      </Button>
-                    </>
-                  )}
+                  <Typography variant="body2" color="yellow">
+                    Quantity: {getItemQuantity(item.id)}
+                  </Typography>
+                  <Button color="error" onClick={() => handleDeleteFromCart(item)}>Delete</Button>
                 </>
               }
               actionPosition="right"
@@ -105,17 +87,26 @@ export default function Whiskey() {
         <Typography variant="h4" color="black">
           Total Price: ${totalPrice.toFixed(2)}
         </Typography>
-        {(cart.length > 0) && (
-          <Link to="/cart">
+        <Link to="/Cart">
           <img src="src/assets/images/cart.png" alt="Cart" width="50" height="24" />
           <Typography variant="h5" color="white" marginRight={3} sx={{ ml: 0, fontSize: 25 }}>
-            Checkout
+            <header>Cart</header>
           </Typography>
         </Link>
-        )}
       </Box>
     </Box>
   );
+}
+
+// Group items by type
+const groupItemsByType = (items: any[]) => {
+  return items.reduce((acc, item) => {
+    if (!acc[item.title]) {
+      acc[item.title] = [];
+    }
+    acc[item.title].push(item);
+    return acc;
+  }, {});
 }
 
 const itemData = [
@@ -156,9 +147,9 @@ const itemData = [
   },
   { 
     id: 6,
-    img: 'src/assets/images/Skrewball Peanut Butter Whiskey .jpeg',
+    img: 'src/assets/images/Bubbas 2.jpeg',
     title: 'Flavor Whiskey',
-    author: 'Skrewball Peanut Butter Whiskey',
+    author: 'Bubbas Secret Stills Burnt Sugar Whiskey',
     price: 27.99
   },
   {
@@ -213,7 +204,7 @@ const itemData = [
   { 
     id: 14,
     img: 'src/assets/images/Maker’s Mark Bourbon Whisky.jpeg',
-    title: 'Scotch',
+    title: 'Bourbon',
     author: 'Markers Mark',
     price: 24.99
   },
@@ -225,10 +216,19 @@ const itemData = [
     price: 18.99
   },
   {
+    id: 16,
     img: 'src/assets/images/Jameson Irish Whiskey.jpeg',
     title: 'Irish',
     author: 'Jameson Irish Whiskey',
     price: 27.99
+  },
+
+  {
+    id: 16,
+    img: 'src/assets/images/Hibiki.jpeg',
+    title: 'Japanese',
+    author: 'Hibiki Japanese Harmony Whisky',
+    price: 99.99
   },
 
 ];
