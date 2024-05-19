@@ -36,7 +36,7 @@ export default function Whiskey() {
   const filteredItems = selectedType === 'All' ? itemData : itemData.filter(item => item.title === selectedType);
   
   return (
-    <Box sx={{ width: '100%', height: '100%', overflowY: 'initial', backgroundImage: '/images/Gran_Bar.jpeg', paddingTop: 10, paddingBottom: 7, display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ width: '100%', height: '100%', overflowY: 'initial', backgroundImage: 'url(/images/Gran_Bar.jpeg)', paddingTop: 10, paddingBottom: 7, display: 'flex', flexDirection: 'column' }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 4 }}>
         <Typography variant="h4" color="white" sx={{ marginRight: 2 }}>
           Filter by Type:
