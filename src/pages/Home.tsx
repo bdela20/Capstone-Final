@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
-//@ts-ignore
-import Background from '../assets/images/Gran_Bar.jpeg'; 
 
 function Home() {
   return (
     <div 
-      style={{ backgroundImage: `url(${ Background })`}} 
+      style={{ backgroundImage:'/images/Gran_Bar.jpeg'}} 
       className='flex flex-row justify-center mx-auto bg-cover bg-fixed'
       >
         <div className='flex place-items-center h-screen'>
