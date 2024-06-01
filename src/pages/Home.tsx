@@ -10,7 +10,7 @@ function Home() {
         <div>
           <Link to="/whiskeys">
             <h1 className='p-10 bg-white bg-opacity-45 text-black rounded'>
-              Welcome to our Handpicked Whiskey Collection 🥃
+              Welcome to our Handpicked Whiskey Collection
             </h1>
           </Link>
         </div>
