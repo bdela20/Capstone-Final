@@ -32,7 +32,7 @@ function Navbar() {
   return (
     <nav className='flex items-center justify-between flex-wrap bg-red-900 p-6 sticky top-0 left-0 w-full'>
       <div className='flex items-center flex-shrink-0 text-black mr-6 hover:text-white'>
-        <Link to='/whiskeys' className='font-semibold text-xl tracking-tight'>Best Whiskeys in the World 🥃</Link>
+        <Link to='/whiskeys' className='font-semibold text-xl tracking-tight'>Best Whiskeys in the World </Link>
       </div>
       <div className='w-full block flex-grow items-center'>
         <div className="text-sm lg:flex-grow">
